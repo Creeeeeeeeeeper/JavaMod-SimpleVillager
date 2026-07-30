@@ -1,0 +1,38 @@
+{
+	"schemaVersion": 1,
+	"id": "simplevillager",
+	"version": "${version}",
+	"name": "Simple Villagers",
+	"description": "Simple villager management mod - compact villager automation",
+	"authors": [
+		"Creeeeeeeeeeper"
+	],
+	"contact": {
+		"homepage": "https://github.com/Creeeeeeeeeeper/JavaMod-SimpleVillagers",
+		"issues": "https://github.com/Creeeeeeeeeeper/JavaMod-SimpleVillagers/issues"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/simplevillager/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.simplevillager.SimpleVillagerMod"
+		],
+		"client": [
+			"com.simplevillager.client.SimpleVillagerClient"
+		]
+	},
+	"mixins": [
+		"simplevillager.mixins.json",
+		{
+			"config": "simplevillager.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.19.3",
+		"minecraft": "~26.2",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}
