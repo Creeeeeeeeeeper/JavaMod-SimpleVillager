@@ -2,6 +2,8 @@
 
 依赖 Fabric Loader 0.19.3+、Fabric API、Java 25
 
+目前仅有支持Minecraft 26.2版本
+
 ## 功能模块
 
 ### 交易所
