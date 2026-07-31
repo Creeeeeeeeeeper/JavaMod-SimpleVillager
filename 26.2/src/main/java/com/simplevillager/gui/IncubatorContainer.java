@@ -82,7 +82,7 @@ public class IncubatorContainer extends AbstractContainerMenu {
 
         @Override
         public boolean mayPlace(ItemStack stack) {
-            return stack.getItem() instanceof VillagerItem;
+            return stack.getItem() instanceof VillagerItem && VillagerItem.isBaby(stack);
         }
     }
 }

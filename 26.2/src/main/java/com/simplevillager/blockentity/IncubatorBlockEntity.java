@@ -74,17 +74,32 @@ public class IncubatorBlockEntity extends VillagerBlockEntityBase {
     public static void serverTick(Level level, BlockPos pos, BlockState state, IncubatorBlockEntity entity) {
         if (level.isClientSide()) return;
 
-        // Phase 1: Pull baby villager from input inventory
+        // Phase 1: Eject adult villagers to output, pull baby villager from input
         if (!entity.hasVillager()) {
             for (int i = 0; i < entity.inputInventory.getContainerSize(); i++) {
                 ItemStack stack = entity.inputInventory.getItem(i);
-                if (!stack.isEmpty() && stack.getItem() instanceof VillagerItem) {
+                if (stack.isEmpty() || !(stack.getItem() instanceof VillagerItem)) continue;
+
+                if (VillagerItem.isBaby(stack)) {
                     ItemStack extracted = stack.copy();
                     extracted.setCount(1);
                     stack.shrink(1);
                     entity.setVillager(extracted);
                     entity.syncData();
                     break;
+                } else {
+                    // Adult villager: eject to output inventory
+                    ItemStack extracted = stack.copy();
+                    extracted.setCount(1);
+                    stack.shrink(1);
+                    for (int j = 0; j < entity.outputInventory.getContainerSize(); j++) {
+                        if (entity.outputInventory.getItem(j).isEmpty()) {
+                            entity.outputInventory.setItem(j, extracted);
+                            entity.setChanged();
+                            break;
+                        }
+                    }
+                    entity.syncData();
                 }
             }
         }

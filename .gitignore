@@ -51,6 +51,7 @@ minecraft-exported-crash-info-*
 
 # temp analysis files
 
+temp/
 net/
 temp_extract/
 tmp_extract/

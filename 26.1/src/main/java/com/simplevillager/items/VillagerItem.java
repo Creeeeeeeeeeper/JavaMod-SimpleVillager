@@ -95,6 +95,12 @@ public class VillagerItem extends Item {
         // TODO: play villager sounds based on config
     }
 
+    public static boolean isBaby(ItemStack stack) {
+        com.simplevillager.datacomponent.VillagerData data = stack.get(ModItems.VILLAGER_DATA);
+        if (data == null || data.isEmpty()) return false;
+        return data.getNbt().getInt("Age").orElse(0) < 0;
+    }
+
     public static Villager createVillagerFromStack(Level level, ItemStack stack) {
         com.simplevillager.datacomponent.VillagerData data = stack.get(ModItems.VILLAGER_DATA);
         if (data == null || data.isEmpty()) {

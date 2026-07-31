@@ -85,7 +85,7 @@ public class IncubatorBlock extends VillagerBlockBase {
             return InteractionResult.TRY_WITH_EMPTY_HAND;
         }
 
-        if (!incubator.hasVillager() && stack.getItem() instanceof VillagerItem) {
+        if (!incubator.hasVillager() && stack.getItem() instanceof VillagerItem && VillagerItem.isBaby(stack)) {
             // Insert villager into input inventory
             ItemStack toInsert = stack.copy();
             toInsert.setCount(1);
