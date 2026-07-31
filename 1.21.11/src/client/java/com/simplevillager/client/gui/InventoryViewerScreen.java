@@ -24,7 +24,9 @@ public class InventoryViewerScreen extends AbstractContainerScreen<InventoryView
 
     public InventoryViewerScreen(InventoryViewerContainer container, Inventory playerInventory, Component name) {
         super(container, playerInventory, name);
-        this.inventoryLabelY = this.imageHeight - 94 + 15;
+        this.imageWidth = 176;
+        this.imageHeight = 182;
+        this.inventoryLabelY = this.imageHeight - 96 + 3;
     }
 
     @Override

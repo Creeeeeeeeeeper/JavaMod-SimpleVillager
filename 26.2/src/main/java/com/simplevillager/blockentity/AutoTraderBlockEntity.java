@@ -181,6 +181,7 @@ public class AutoTraderBlockEntity extends VillagerBlockEntityBase implements Wo
     }
 
     private void applyTradeLimits() {
+        if (level == null || level.isClientSide()) return;
         if (offerMaxUsesField == null && (offerUsesField == null || !ModConfig.server().autoTraderInfinite)) return;
         SimpleVillagerEntity v = getVillagerEntity();
         if (v == null) return;

@@ -35,6 +35,7 @@ public class BreederBlock extends VillagerBlockBase {
 
     @Override
     protected InteractionResult useItemOn(ItemStack heldItem, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (level.isClientSide()) return InteractionResult.TRY_WITH_EMPTY_HAND;
         BlockEntity tileEntity = level.getBlockEntity(pos);
         if (!(tileEntity instanceof BreederBlockEntity breeder)) {
             return super.useItemOn(heldItem, state, level, pos, player, hand, hit);
