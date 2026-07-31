@@ -2,7 +2,7 @@
 
 依赖 Fabric Loader 0.19.3+、Fabric API、Java 25
 
-目前仅有支持Minecraft 26.2版本
+支持 Minecraft 26.1 与 26.2 版本
 
 ## 功能模块
 
