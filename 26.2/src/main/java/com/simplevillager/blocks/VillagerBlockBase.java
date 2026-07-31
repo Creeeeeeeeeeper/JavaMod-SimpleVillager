@@ -85,7 +85,7 @@ public abstract class VillagerBlockBase extends BaseEntityBlock {
 
     public static void playVillagerSound(Level world, BlockPos pos, SoundEvent soundEvent) {
         if (!ModConfig.server().villagerSounds) return;
-        world.playSound(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, soundEvent, SoundSource.BLOCKS, 1.0f, 1.0f);
+        world.playSound(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, soundEvent, SoundSource.BLOCKS, ModConfig.client().volume, 1.0f);
     }
 
     @Override

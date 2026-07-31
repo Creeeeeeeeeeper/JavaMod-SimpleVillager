@@ -14,4 +14,5 @@ public class BreederRenderState extends BlockEntityRenderState {
     public int lightCoords = 15728880;
     public final BlockModelRenderState bedFoot = new BlockModelRenderState();
     public final BlockModelRenderState bedHead = new BlockModelRenderState();
+    public boolean renderContents = true;
 }

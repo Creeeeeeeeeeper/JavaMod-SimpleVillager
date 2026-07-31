@@ -11,4 +11,5 @@ public class FarmerRenderState extends BlockEntityRenderState {
     public VillagerRenderState villagerRenderState = new VillagerRenderState();
     public int lightCoords = 15728880;
     public final BlockModelRenderState crop = new BlockModelRenderState();
+    public boolean renderContents = true;
 }

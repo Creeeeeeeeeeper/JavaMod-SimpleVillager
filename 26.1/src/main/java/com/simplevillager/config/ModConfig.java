@@ -72,7 +72,6 @@ public class ModConfig {
                 Map<String, String> map = parseToml(content);
                 config.sneakPickup = getBool(map, "sneak_pickup", config.sneakPickup);
                 config.volume = getFloat(map, "volume", config.volume);
-                config.cycleTradesButtonLocation = getString(map, "cycle_trades_button_location", config.cycleTradesButtonLocation);
                 config.renderBlockContents = getBool(map, "render_block_contents", config.renderBlockContents);
                 config.blockRenderDistance = getInt(map, "block_render_distance", config.blockRenderDistance);
             } catch (Exception e) {
@@ -182,21 +181,14 @@ public class ModConfig {
         String toml = """
                 # Simple Villagers - Client Configuration
                 # 简易村民 - 客户端配置
-                # NOTE: These options are saved but currently have no effect in-game.
-                # 注意：以下选项会被保存，但目前游戏中尚未生效。
 
                 # Whether to pick up villagers by sneaking and right-clicking
                 # 是否可以通过潜行+右键拾取村民
                 sneak_pickup = %b
 
-                # Volume for villager interaction sounds (0.0 - 1.0)
-                # 村民互动音效音量（0.0 - 1.0）
+                # Volume for villager block sounds (0.0 - 1.0)
+                # 村民方块音效音量（0.0 - 1.0）
                 volume = %s
-
-                # Button location for trade cycling
-                # 交易刷新按钮位置
-                # Options / 可选值: "TOP_LEFT", "TOP_RIGHT", "NONE"
-                cycle_trades_button_location = "%s"
 
                 # Whether to render the contents of blocks in the world
                 # 是否在方块上方渲染内部物品/村民
@@ -207,7 +199,6 @@ public class ModConfig {
                 block_render_distance = %d
                 """.formatted(
                 config.sneakPickup, config.volume,
-                config.cycleTradesButtonLocation,
                 config.renderBlockContents, config.blockRenderDistance
         );
         writeToml(CLIENT_CONFIG_PATH, toml);

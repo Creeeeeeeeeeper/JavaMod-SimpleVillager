@@ -59,6 +59,8 @@ public class BreederBER implements BlockEntityRenderer<BreederBlockEntity, Breed
     @Override
     public void extractRenderState(BreederBlockEntity blockEntity, BreederRenderState state, float partialTick, Vec3 cameraPos, ModelFeatureRenderer.CrumblingOverlay overlay) {
         net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState.extractBase(blockEntity, state, overlay);
+        state.renderContents = RenderConfig.shouldRender(blockEntity, cameraPos);
+        if (!state.renderContents) return;
 
         int lightCoords = 15728880;
         if (blockEntity.getLevel() != null) {
@@ -103,6 +105,7 @@ public class BreederBER implements BlockEntityRenderer<BreederBlockEntity, Breed
 
     @Override
     public void submit(BreederRenderState state, PoseStack poseStack, SubmitNodeCollector collector, CameraRenderState cameraState) {
+        if (!state.renderContents) return;
         VillagerRenderer vr = getVillagerRenderer();
         if (vr == null) return;
 

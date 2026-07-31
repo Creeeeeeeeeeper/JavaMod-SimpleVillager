@@ -11,4 +11,5 @@ public class TraderRenderState extends BlockEntityRenderState {
     public final BlockModelRenderState workstation = new BlockModelRenderState();
     public boolean renderVillager = false;
     public int worldLight = 15728880;
+    public boolean renderContents = true;
 }

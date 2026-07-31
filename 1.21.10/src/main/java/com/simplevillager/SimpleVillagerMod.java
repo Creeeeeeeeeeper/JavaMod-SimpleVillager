@@ -94,6 +94,7 @@ public class SimpleVillagerMod implements ModInitializer {
 
         UseEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
             if (world.isClientSide()) return InteractionResult.PASS;
+            if (!ModConfig.client().sneakPickup) return InteractionResult.PASS;
             if (!(entity instanceof Villager villager)) return InteractionResult.PASS;
             if (!player.isShiftKeyDown()) return InteractionResult.PASS;
             if (!VillagerPickup.arePickupConditionsMet(villager)) return InteractionResult.PASS;

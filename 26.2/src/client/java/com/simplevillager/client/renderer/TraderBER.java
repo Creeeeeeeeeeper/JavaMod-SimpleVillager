@@ -58,6 +58,8 @@ public class TraderBER implements BlockEntityRenderer<BlockEntity, TraderRenderS
         net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState.extractBase(blockEntity, state, overlay);
         state.renderVillager = false;
         state.villagerRenderState = null;
+        state.renderContents = RenderConfig.shouldRender(blockEntity, cameraPos);
+        if (!state.renderContents) return;
 
         int lightCoords = 15728880;
         if (blockEntity.getLevel() != null) {
@@ -95,6 +97,7 @@ public class TraderBER implements BlockEntityRenderer<BlockEntity, TraderRenderS
 
     @Override
     public void submit(TraderRenderState state, PoseStack poseStack, SubmitNodeCollector collector, CameraRenderState cameraState) {
+        if (!state.renderContents) return;
         poseStack.pushPose();
 
         if (state.renderVillager && state.villagerRenderState != null) {

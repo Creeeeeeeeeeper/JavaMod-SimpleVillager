@@ -48,6 +48,9 @@ public class IronFarmBER implements BlockEntityRenderer<IronFarmBlockEntity, Vil
         net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState.extractBase(blockEntity, state, overlay);
         state.clear();
 
+        state.renderContents = RenderConfig.shouldRender(blockEntity, cameraPos);
+        if (!state.renderContents) return;
+
         int lightCoords = 15728880;
         if (blockEntity.getLevel() != null) {
             BlockPos pos = blockEntity.getBlockPos();
@@ -120,6 +123,7 @@ public class IronFarmBER implements BlockEntityRenderer<IronFarmBlockEntity, Vil
 
     @Override
     public void submit(VillagerBERState state, PoseStack poseStack, SubmitNodeCollector collector, CameraRenderState cameraState) {
+        if (!state.renderContents) return;
         EntityRenderDispatcher dispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
         for (VillagerBERState.EntityData entity : state.entities) {
             poseStack.pushPose();

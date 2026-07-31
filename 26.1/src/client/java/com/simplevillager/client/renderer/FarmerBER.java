@@ -53,6 +53,8 @@ public class FarmerBER implements BlockEntityRenderer<FarmerBlockEntity, FarmerR
     @Override
     public void extractRenderState(FarmerBlockEntity blockEntity, FarmerRenderState state, float partialTick, Vec3 cameraPos, ModelFeatureRenderer.CrumblingOverlay overlay) {
         net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState.extractBase(blockEntity, state, overlay);
+        state.renderContents = RenderConfig.shouldRender(blockEntity, cameraPos);
+        if (!state.renderContents) return;
 
         int lightCoords = 15728880;
         if (blockEntity.getLevel() != null) {
@@ -90,6 +92,7 @@ public class FarmerBER implements BlockEntityRenderer<FarmerBlockEntity, FarmerR
 
     @Override
     public void submit(FarmerRenderState state, PoseStack poseStack, SubmitNodeCollector collector, CameraRenderState cameraState) {
+        if (!state.renderContents) return;
         VillagerRenderer vr = getVillagerRenderer();
 
         poseStack.pushPose();

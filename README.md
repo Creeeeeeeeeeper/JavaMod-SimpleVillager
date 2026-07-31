@@ -80,14 +80,13 @@
 
 ### client.toml
 
-> 注意：以下选项会被保存，但目前游戏中尚未生效。
+> 通过 `/sv reload` 热重载生效。
 
 | 选项 | 默认值 | 说明 |
 |---|---|---|
 | `sneak_pickup` | `true` | 是否可以通过潜行+右键拾取村民 |
-| `volume` | `0.5` | 村民互动音效音量（`0.0` - `1.0`） |
-| `cycle_trades_button_location` | `"TOP_RIGHT"` | 交易刷新按钮位置。可选值：`"TOP_LEFT"`、`"TOP_RIGHT"`、`"NONE"` |
-| `render_block_contents` | `true` | 是否在方块上方渲染内部物品/村民 |
+| `volume` | `0.5` | 村民方块音效音量（`0.0` - `1.0`） |
+| `render_block_contents` | `true` | 是否渲染村民方块内部的村民/物品等内容 |
 | `block_render_distance` | `48` | 渲染方块内容的最大距离（方块数） |
 
 ### server.toml
