@@ -18,6 +18,8 @@ public class AutoTraderScreen extends AbstractContainerScreen<AutoTraderContaine
 
     public AutoTraderScreen(AutoTraderContainer container, Inventory playerInventory, Component name) {
         super(container, playerInventory, name);
+        this.imageWidth = 176;
+        this.imageHeight = 202;
     }
 
     @Override
