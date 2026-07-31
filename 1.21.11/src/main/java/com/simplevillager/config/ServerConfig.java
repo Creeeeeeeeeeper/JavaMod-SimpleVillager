@@ -9,7 +9,7 @@ public class ServerConfig {
     public int traderRestockTime = 100;
     public int traderRestockUses = 100;
     public int traderMaxUses = 20;
-    public int autoTraderSpeed = 100;
+    public int autoTraderSpeed = 10;
     public int incubatorSpeed = 1;
     public boolean villagerSounds = true;
     public boolean tradeCycling = true;

@@ -96,16 +96,24 @@ public class ModConfig {
                 # Changes require a world restart to take effect.
                 # 修改后需要重启世界生效。
 
-                # Time in ticks for villagers to breed (20 ticks = 1 second)
-                # 村民繁殖所需时间（20刻 = 1秒）
+                # Interval in ticks between breeding attempts (20 ticks = 1 second).
+                # The breeder tries to breed every this many ticks, but needs 2 adult
+                # villagers and 24+ food points to actually produce a baby villager.
+                # 繁殖尝试间隔（20刻 = 1秒）。繁殖器每过这些刻数尝试繁殖一次，
+                # 需要两只成年村民且食物营养值达到24才会产出小村民。
                 breeding_time = %d
 
-                # Time in ticks for villagers to convert (20 ticks = 1 second)
-                # 村民僵尸感染转换所需时间（20刻 = 1秒）
+                # Time in ticks for the zombie villager to be cured (20 ticks = 1 second).
+                # The whole conversion takes converting_time + 100 ticks:
+                # 0-100 zombify, converting_time cure, +100 output delay. Default 1900 = 100s total.
+                # 僵尸村民治愈所需时间（20刻 = 1秒）。完整转换耗时 = converting_time + 100 刻：
+                # 前100刻僵尸化，converting_time刻治愈，最后100刻输出。默认1900 = 总计100秒。
                 converting_time = %d
 
-                # Number of crop harvests before the farmer pauses
-                # 农民收割多少次作物后暂停
+                # Crop growth speed: every second there is a 1/farmer_speed chance to grow
+                # the crop one stage. Higher = slower growth (default 10 = 10% chance per second).
+                # 作物生长速度的分母：每秒有 1/farmer_speed 的概率让作物生长一格。
+                # 数值越大生长越慢（默认10 = 每秒10%概率）。
                 farmer_speed = %d
 
                 # List of crop block IDs that the farmer will NOT harvest
@@ -113,40 +121,47 @@ public class ModConfig {
                 # Example / 示例: crop_blacklist = ["minecraft:nether_wart", "minecraft:beetroot"]
                 crop_blacklist = [%s]
 
-                # Time in ticks before an iron golem spawns in the iron farm
-                # 刷铁机中铁傀儡生成间隔（20刻 = 1秒）
+                # Time in ticks until the iron golem appears (20 ticks = 1 second).
+                # The full loot cycle takes golem_spawn_time + 100 ticks. Default 1100 = 60s per cycle.
+                # 铁傀儡出现所需时间（20刻 = 1秒）。完整掉落循环耗时 = golem_spawn_time + 100 刻。
+                # 默认1100 = 每60秒一个循环。
                 golem_spawn_time = %d
 
-                # Time in ticks for trader to restock after trading
-                # 交易站补货间隔（20刻 = 1秒）
+                # Base wait in ticks before the trader restocks (20 ticks = 1 second).
+                # Actual wait = trader_restock_time + a random 0-2400 tick delay.
+                # A restock is also triggered early when total uses reach trader_restock_uses.
+                # 交易站补货的基础等待时间（20刻 = 1秒）。实际等待 = trader_restock_time + 随机0~2400刻。
+                # 当所有交易累计次数达到 trader_restock_uses 时也会提前补货。
                 trader_restock_time = %d
 
-                # Number of uses before trader restocks
-                # 交易多少次后触发补货
+                # Total number of trades (across all offers) that triggers an instant restock
+                # 所有交易选项累计交易次数达到多少后立即触发补货
                 trader_restock_uses = %d
 
-                # Maximum number of uses for each trade offer
-                # 每个交易选项的最大可交易次数
+                # Maximum number of uses for each trade offer. 0 = keep vanilla limits.
+                # 每个交易选项的最大可交易次数。设为0则保持原版限制。
                 trader_max_uses = %d
 
-                # Time in ticks between auto trader trades
-                # 自动交易站交易间隔（20刻 = 1秒）
+                # Interval in ticks between automatic trades (20 ticks = 1 second)
+                # 自动交易站每交易一次的间隔（20刻 = 1秒）
                 auto_trader_speed = %d
 
-                # Speed multiplier for the incubator
-                # 孵化站速度倍数
+                # How many age ticks a baby villager grows per game tick (min 1).
+                # 1 = vanilla speed (about 20 minutes to become adult); larger = faster.
+                # 每游戏刻小村民成长的年龄刻数（最小为1）。1 = 原版速度（约20分钟成年）；越大越快。
                 incubator_speed = %d
 
-                # Whether villagers make sounds when interacted with
-                # 与村民互动时是否播放音效
+                # Whether villager blocks play sounds (ambient, work, breeding, conversion, etc.)
+                # 村民方块是否播放音效（环境、工作、繁殖、转换等）
                 villager_sounds = %b
 
-                # Enable trade cycling button in the merchant screen
-                # 是否启用交易刷新按钮
+                # Enable the trade cycling button in the merchant screen (server accepts the request)
+                # 是否启用交易刷新按钮（服务端是否接受刷新请求）
                 trade_cycling = %b
 
-                # Enable universal reputation (villager discounts apply globally)
-                # 是否启用全局声望（村民折扣全局生效）
+                # When enabled, curing a zombie villager grants the owner the "cured" reputation,
+                # giving discounts from this villager without a full village structure.
+                # 启用后，治愈僵尸村民会给予所有者“治愈”声望，使该村民提供折扣。
                 universal_reputation = %b
 
                 # Auto trader infinite mode - trades never run out, no restocking needed
@@ -167,6 +182,8 @@ public class ModConfig {
         String toml = """
                 # Simple Villagers - Client Configuration
                 # 简易村民 - 客户端配置
+                # NOTE: These options are saved but currently have no effect in-game.
+                # 注意：以下选项会被保存，但目前游戏中尚未生效。
 
                 # Whether to pick up villagers by sneaking and right-clicking
                 # 是否可以通过潜行+右键拾取村民

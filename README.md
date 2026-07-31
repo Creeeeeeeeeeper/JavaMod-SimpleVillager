@@ -80,6 +80,8 @@
 
 ### client.toml
 
+> 注意：以下选项会被保存，但目前游戏中尚未生效。
+
 | 选项 | 默认值 | 说明 |
 |---|---|---|
 | `sneak_pickup` | `true` | 是否可以通过潜行+右键拾取村民 |
@@ -92,19 +94,19 @@
 
 | 选项 | 默认值 | 说明 |
 |---|---|---|
-| `breeding_time` | `1200` | 村民繁殖所需时间（刻，20刻=1秒） |
-| `converting_time` | `1900` | 僵尸村民转化所需时间（刻） |
-| `farmer_speed` | `10` | 农民收割多少次作物后暂停 |
+| `breeding_time` | `1200` | 繁殖尝试间隔（刻，20刻=1秒）。需两只成年村民且食物营养值达到 `24` 才会产出小村民 |
+| `converting_time` | `1900` | 僵尸村民治愈所需时间（刻）。总转换耗时 = 该值 + 100 刻（默认共 100 秒） |
+| `farmer_speed` | `10` | 作物生长速度分母：每秒有 `1/N` 概率让作物生长一格，数值越大越慢（默认每秒 10%） |
 | `crop_blacklist` | `[]` | 农民不会收割的作物 ID 列表，例：`["minecraft:nether_wart"]` |
-| `golem_spawn_time` | `1100` | 铁傀儡生成间隔（刻） |
-| `trader_restock_time` | `100` | 交易站补货间隔（刻） |
-| `trader_restock_uses` | `100` | 交易多少次后触发补货 |
-| `trader_max_uses` | `20` | 每个交易选项的最大可交易次数 |
-| `auto_trader_speed` | `100` | 自动交易站交易间隔（刻） |
-| `incubator_speed` | `1` | 培育所速度倍数（越大成长越快） |
-| `villager_sounds` | `true` | 与村民互动时是否播放音效 |
+| `golem_spawn_time` | `1100` | 铁傀儡出现所需时间（刻）。完整掉落循环 = 该值 + 100 刻（默认 60 秒） |
+| `trader_restock_time` | `100` | 补货基础等待（刻）。实际等待 = 该值 + 随机 `0~2400` 刻 |
+| `trader_restock_uses` | `100` | 所有交易选项累计次数达到多少后立即触发补货 |
+| `trader_max_uses` | `20` | 每个交易选项的最大可交易次数；`0` = 保持原版限制 |
+| `auto_trader_speed` | `10` | 自动交易站交易间隔（刻，0.5 秒） |
+| `incubator_speed` | `1` | 每游戏刻小村民成长的年龄刻数（最小为 1）；`1` = 原版速度（约 20 分钟成年） |
+| `villager_sounds` | `true` | 村民方块是否播放音效（环境、工作、繁殖、转换等） |
 | `trade_cycling` | `true` | 是否启用交易刷新按钮 |
-| `universal_reputation` | `false` | 是否启用全局声望（折扣全局生效） |
+| `universal_reputation` | `false` | 治愈僵尸村民时是否给予所有者“治愈”声望（折扣全局生效） |
 | `auto_trader_infinite` | `false` | 自动交易站无限模式，交易不会耗尽，无需补货 |
 
 ## 配方
