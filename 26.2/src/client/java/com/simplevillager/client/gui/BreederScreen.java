@@ -24,8 +24,8 @@ public class BreederScreen extends AbstractContainerScreen<BreederContainer> {
         RenderPipeline pipeline = RenderPipelines.GUI_TEXTURED;
         guiGraphics.blit(pipeline, BACKGROUND, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight, 256, 256);
         super.extractContents(guiGraphics, mouseX, mouseY, partialTicks);
-        guiGraphics.text(this.font, Component.translatable("gui.SimpleVillager.food_items"), this.leftPos + 52, this.topPos + 8, 0x404040, false);
-        guiGraphics.text(this.font, Component.translatable("gui.SimpleVillager.output"), this.leftPos + 52, this.topPos + 39, 0x404040, false);
+        guiGraphics.text(this.font, Component.translatable("gui.simplevillager.food_items"), this.leftPos + 52, this.topPos + 8, 0x404040, false);
+        guiGraphics.text(this.font, Component.translatable("gui.simplevillager.output"), this.leftPos + 52, this.topPos + 39, 0x404040, false);
         guiGraphics.text(this.font, this.playerInventoryTitle, this.leftPos + 8, this.topPos + this.imageHeight - 96 + 2, 0x404040, false);
     }
 }

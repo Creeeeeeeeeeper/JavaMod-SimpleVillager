@@ -34,8 +34,8 @@ public class AutoTraderScreen extends AbstractContainerScreen<AutoTraderContaine
         addRenderableOnly(new Renderable() {
             @Override
             public void render(GuiGraphics g, int mx, int my, float pt) {
-                g.drawCenteredString(AutoTraderScreen.this.font, Component.translatable("gui.SimpleVillager.input"), AutoTraderScreen.this.leftPos + AutoTraderScreen.this.imageWidth / 2, AutoTraderScreen.this.topPos + 45, 0xFF0000);
-                g.drawCenteredString(AutoTraderScreen.this.font, Component.translatable("gui.SimpleVillager.output"), AutoTraderScreen.this.leftPos + AutoTraderScreen.this.imageWidth / 2, AutoTraderScreen.this.topPos + 77, 0xFF0000);
+                g.drawCenteredString(AutoTraderScreen.this.font, Component.translatable("gui.simplevillager.input"), AutoTraderScreen.this.leftPos + AutoTraderScreen.this.imageWidth / 2, AutoTraderScreen.this.topPos + 45, 0x404040);
+                g.drawCenteredString(AutoTraderScreen.this.font, Component.translatable("gui.simplevillager.output"), AutoTraderScreen.this.leftPos + AutoTraderScreen.this.imageWidth / 2, AutoTraderScreen.this.topPos + 77, 0x404040);
             }
         });
     }

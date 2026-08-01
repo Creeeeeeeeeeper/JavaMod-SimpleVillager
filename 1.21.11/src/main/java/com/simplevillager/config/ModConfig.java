@@ -110,9 +110,9 @@ public class ModConfig {
                 converting_time = %d
 
                 # Crop growth speed: every second there is a 1/farmer_speed chance to grow
-                # the crop one stage. Higher = slower growth (default 10 = 10% chance per second).
+                # the crop one stage. Higher = slower growth (default 10 = 10 percent chance per second).
                 # 作物生长速度的分母：每秒有 1/farmer_speed 的概率让作物生长一格。
-                # 数值越大生长越慢（默认10 = 每秒10%概率）。
+                # 数值越大生长越慢（默认10 = 每秒百分之十概率）。
                 farmer_speed = %d
 
                 # List of crop block IDs that the farmer will NOT harvest
