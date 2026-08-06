@@ -1,0 +1,38 @@
+name: 文档问题
+description: Wiki / README 描述不清晰或错误
+title: "[Docs]: "
+labels: [documentation]
+body:
+  - type: markdown
+    attributes:
+      value: |-
+        感谢指出文档问题！请说明具体位置和问题所在。
+  - type: textarea
+    id: description
+    attributes:
+      label: 文档问题描述
+      description: 哪里描述不清晰、有错误或缺失？
+      placeholder: 例如：README 中交易刷新键的描述与实际不符...
+    validations:
+      required: true
+  - type: input
+    id: location
+    attributes:
+      label: 出现问题的文档位置
+      description: 页面链接或文件路径
+      placeholder: https://github.com/Creeeeeeeeeeper/JavaMod-SimpleVillager/blob/main/README.md
+    validations:
+      required: false
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: 建议的正确内容
+      description: 你认为应该怎么描述
+    validations:
+      required: false
+  - type: textarea
+    id: extra
+    attributes:
+      label: 附加信息
+    validations:
+      required: false
