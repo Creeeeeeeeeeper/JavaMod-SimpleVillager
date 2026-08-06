@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 提交前请阅读贡献指南
+    url: https://github.com/Creeeeeeeeeeper/JavaMod-SimpleVillager/blob/main/CONTRIBUTING.md
+    about: 请在提交 Issue 前阅读 CONTRIBUTING.md，了解 Issue 提交规范与 Bug 报告要求。

@@ -1,0 +1,51 @@
+name: 性能问题
+description: 卡顿、帧率下降、内存占用过高等
+title: "[Performance]: "
+labels: [performance]
+body:
+  - type: markdown
+    attributes:
+      value: |-
+        请说明是否在**只安装本 Mod** 的情况下测试过，以排除其他模组影响。
+  - type: textarea
+    id: description
+    attributes:
+      label: 性能问题描述
+      description: 卡顿发生在什么场景（放置哪个方块、多少方块、多少村民...）
+    validations:
+      required: true
+  - type: input
+    id: cpu
+    attributes:
+      label: CPU
+      placeholder: 例如：12th Gen Intel Core i5-12400F
+    validations:
+      required: true
+  - type: input
+    id: ram
+    attributes:
+      label: 内存
+      placeholder: 例如：16GB
+    validations:
+      required: true
+  - type: input
+    id: gpu
+    attributes:
+      label: 显卡 / 驱动版本
+      placeholder: 例如：NVIDIA RTX 4060
+    validations:
+      required: false
+  - type: input
+    id: mc_version
+    attributes:
+      label: Minecraft 版本
+      placeholder: 1.21.1 / 1.21.10 / 1.21.11 / 26.1 / 26.2
+    validations:
+      required: true
+  - type: textarea
+    id: extra
+    attributes:
+      label: 附加信息
+      description: 相关截图、F3 信息等
+    validations:
+      required: false

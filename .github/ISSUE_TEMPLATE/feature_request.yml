@@ -1,0 +1,31 @@
+name: 功能建议
+description: 希望增加的新功能或改进
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |-
+        感谢你的建议！请先搜索已有 Issue 确认没有重复提议。
+  - type: textarea
+    id: description
+    attributes:
+      label: 功能描述
+      description: 你希望新增或改进什么功能
+      placeholder: 例如：希望村民方块支持漏斗输入村民...
+    validations:
+      required: true
+  - type: textarea
+    id: scenario
+    attributes:
+      label: 使用场景
+      description: 这个功能在什么场景下对你有帮助
+    validations:
+      required: false
+  - type: textarea
+    id: other
+    attributes:
+      label: 其他想法
+      description: 参考实现、界面设计、配置项等任何补充
+    validations:
+      required: false
