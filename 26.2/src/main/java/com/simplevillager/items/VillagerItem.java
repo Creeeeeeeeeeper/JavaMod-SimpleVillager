@@ -69,7 +69,7 @@ public class VillagerItem extends Item {
             net.minecraft.nbt.CompoundTag nbt = data.getNbt();
             Integer age = nbt.getInt("Age").orElse(null);
             if (age != null && age < 0) {
-                return Component.translatable("item.SimpleVillager.baby_villager");
+                return Component.translatable("item.simplevillager.baby_villager");
             }
             net.minecraft.nbt.CompoundTag vd = nbt.getCompound("VillagerData").orElse(null);
             if (vd != null) {

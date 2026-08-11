@@ -46,14 +46,14 @@ public class SimpleVillagerClient implements ClientModInitializer {
         );
 
         PICK_UP_KEY = KeyMappingHelper.registerKeyMapping(new KeyMapping(
-                "key.SimpleVillager.pick_up",
+                "key.simplevillager.pick_up",
                 InputConstants.Type.KEYSYM,
                 GLFW.GLFW_KEY_V,
                 CATEGORY
         ));
 
         CYCLE_TRADES_KEY = KeyMappingHelper.registerKeyMapping(new KeyMapping(
-                "key.SimpleVillager.cycle_trades",
+                "key.simplevillager.cycle_trades",
                 InputConstants.Type.KEYSYM,
                 GLFW.GLFW_KEY_C,
                 CATEGORY

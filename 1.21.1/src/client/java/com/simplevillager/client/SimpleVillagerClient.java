@@ -45,7 +45,7 @@ public class SimpleVillagerClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         PICK_UP_KEY = KeyBindingHelper.registerKeyBinding(new KeyMapping(
-                "key.SimpleVillager.pick_up",
+                "key.simplevillager.pick_up",
                 InputConstants.Type.KEYSYM,
                 GLFW.GLFW_KEY_V,
                 "key.categories.simplevillager"
@@ -56,7 +56,7 @@ public class SimpleVillagerClient implements ClientModInitializer {
             cycleKey = GLFW.GLFW_KEY_G;
         }
         CYCLE_TRADES_KEY = KeyBindingHelper.registerKeyBinding(new KeyMapping(
-                "key.SimpleVillager.cycle_trades",
+                "key.simplevillager.cycle_trades",
                 InputConstants.Type.KEYSYM,
                 cycleKey,
                 "key.categories.simplevillager"

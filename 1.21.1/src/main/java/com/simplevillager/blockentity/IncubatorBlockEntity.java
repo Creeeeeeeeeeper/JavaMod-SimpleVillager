@@ -6,8 +6,11 @@ import com.simplevillager.datacomponent.VillagerData;
 import com.simplevillager.entity.SimpleVillagerEntity;
 import com.simplevillager.items.VillagerItem;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -16,7 +19,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import org.jetbrains.annotations.Nullable;
 
-public class IncubatorBlockEntity extends VillagerBlockEntityBase {
+public class IncubatorBlockEntity extends VillagerBlockEntityBase implements Container, WorldlyContainer {
 
     private static int incubatorSpeed() { return Math.max(1, ModConfig.server().incubatorSpeed); }
 
@@ -202,5 +205,91 @@ public class IncubatorBlockEntity extends VillagerBlockEntityBase {
     public void setRemoved() {
         super.setRemoved();
         villagerEntity = null;
+    }
+
+    // --- Container + WorldlyContainer for hopper support ---
+
+    private static final int[] HOPPER_INPUT_SLOTS = {0, 1, 2, 3};
+    private static final int[] HOPPER_OUTPUT_SLOTS = {4, 5, 6, 7};
+
+    private int combinedSize() {
+        return inputInventory.getContainerSize() + outputInventory.getContainerSize();
+    }
+
+    private Container getInventoryForSlot(int slot) {
+        if (slot < inputInventory.getContainerSize()) return inputInventory;
+        return outputInventory;
+    }
+
+    private int getLocalSlot(int slot) {
+        if (slot < inputInventory.getContainerSize()) return slot;
+        return slot - inputInventory.getContainerSize();
+    }
+
+    @Override
+    public int getContainerSize() {
+        return combinedSize();
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return inputInventory.isEmpty() && outputInventory.isEmpty();
+    }
+
+    @Override
+    public ItemStack getItem(int slot) {
+        return getInventoryForSlot(slot).getItem(getLocalSlot(slot));
+    }
+
+    @Override
+    public ItemStack removeItem(int slot, int amount) {
+        return getInventoryForSlot(slot).removeItem(getLocalSlot(slot), amount);
+    }
+
+    @Override
+    public ItemStack removeItemNoUpdate(int slot) {
+        return getInventoryForSlot(slot).removeItemNoUpdate(getLocalSlot(slot));
+    }
+
+    @Override
+    public void setItem(int slot, ItemStack stack) {
+        getInventoryForSlot(slot).setItem(getLocalSlot(slot), stack);
+    }
+
+    @Override
+    public boolean stillValid(Player player) {
+        return Container.stillValidBlockEntity(this, player);
+    }
+
+    @Override
+    public void clearContent() {
+        inputInventory.clearContent();
+        outputInventory.clearContent();
+    }
+
+    @Override
+    public boolean canPlaceItem(int slot, ItemStack stack) {
+        if (slot < inputInventory.getContainerSize()) {
+            return stack.getItem() instanceof VillagerItem && VillagerItem.isBaby(stack);
+        }
+        return false;
+    }
+
+    @Override
+    public int[] getSlotsForFace(Direction side) {
+        if (side == Direction.UP) return HOPPER_INPUT_SLOTS;
+        if (side == Direction.DOWN) return HOPPER_OUTPUT_SLOTS;
+        return new int[0];
+    }
+
+    @Override
+    public boolean canPlaceItemThroughFace(int slot, ItemStack stack, Direction side) {
+        if (side == Direction.UP) return canPlaceItem(slot, stack);
+        return false;
+    }
+
+    @Override
+    public boolean canTakeItemThroughFace(int slot, ItemStack stack, Direction side) {
+        return side == Direction.DOWN && slot >= inputInventory.getContainerSize();
     }
 }
