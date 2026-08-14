@@ -71,8 +71,6 @@ public class SimpleVillagerClient implements ClientModInitializer {
             }
         });
 
-        BedConfig.load();
-
         MenuScreens.register(ModMenus.AUTO_TRADER, AutoTraderScreen::new);
         MenuScreens.register(ModMenus.OUTPUT, OutputScreen::new);
         MenuScreens.register(ModMenus.BREEDER, BreederScreen::new);

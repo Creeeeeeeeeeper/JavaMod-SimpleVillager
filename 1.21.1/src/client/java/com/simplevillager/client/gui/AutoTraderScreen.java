@@ -6,19 +6,22 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.ItemStack;
 
 public class AutoTraderScreen extends AbstractContainerScreen<AutoTraderContainer> {
 
     public static final ResourceLocation BACKGROUND = ResourceLocation.fromNamespaceAndPath(SimpleVillagerMod.MOD_ID, "textures/gui/container/auto_trader.png");
+    public static final ResourceLocation DISCOUNT_STRIKETHROUGH = ResourceLocation.withDefaultNamespace("container/villager/discount_strikethrough");
 
     public AutoTraderScreen(AutoTraderContainer container, Inventory playerInventory, Component name) {
         super(container, playerInventory, name);
         this.imageWidth = 176;
         this.imageHeight = 202;
-        this.inventoryLabelY = this.imageHeight - 84;
+        this.inventoryLabelY = this.imageHeight - 84 - 9;
     }
 
     @Override
@@ -34,11 +37,31 @@ public class AutoTraderScreen extends AbstractContainerScreen<AutoTraderContaine
             @Override
             public void render(GuiGraphics g, int mx, int my, float pt) {
                 Component inputLabel = Component.translatable("gui.simplevillager.input");
-                g.drawString(AutoTraderScreen.this.font, inputLabel, AutoTraderScreen.this.leftPos + AutoTraderScreen.this.imageWidth / 2 - AutoTraderScreen.this.font.width(inputLabel) / 2, AutoTraderScreen.this.topPos + 45, 0x404040, false);
+                g.drawString(AutoTraderScreen.this.font, inputLabel, AutoTraderScreen.this.leftPos + AutoTraderScreen.this.imageWidth / 2 - AutoTraderScreen.this.font.width(inputLabel) / 2, AutoTraderScreen.this.topPos + 45, 0xFF404040, false);
                 Component outputLabel = Component.translatable("gui.simplevillager.output");
-                g.drawString(AutoTraderScreen.this.font, outputLabel, AutoTraderScreen.this.leftPos + AutoTraderScreen.this.imageWidth / 2 - AutoTraderScreen.this.font.width(outputLabel) / 2, AutoTraderScreen.this.topPos + 77, 0x404040, false);
+                g.drawString(AutoTraderScreen.this.font, outputLabel, AutoTraderScreen.this.leftPos + AutoTraderScreen.this.imageWidth / 2 - AutoTraderScreen.this.font.width(outputLabel) / 2, AutoTraderScreen.this.topPos + 77, 0xFF404040, false);
             }
         });
+    }
+
+    @Override
+    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
+        super.render(guiGraphics, mouseX, mouseY, partialTicks);
+        ItemStack base = menu.slots.get(0).getItem();
+        if (base.isEmpty()) return;
+        int baseCount = base.getCount();
+        int discounted = menu.getDiscountedCostACount();
+        if (discounted <= 0 || baseCount == discounted) return;
+        int x = this.leftPos + 36, y = this.topPos + 21;
+        String baseStr = String.valueOf(baseCount);
+        int baseWidth = this.font.width(baseStr);
+        if (baseCount == 1) {
+            guiGraphics.drawString(this.font, baseStr, x + 18 - baseWidth, y + 9, 0xFFFFFFFF, true);
+        }
+        RenderType strikethroughRenderType = RenderType.gui();
+        guiGraphics.fill(strikethroughRenderType, x + 18 - baseWidth, y + 13, x + 18, y + 14, 300, 0xFFBA370F);
+        guiGraphics.fill(strikethroughRenderType, x + 18 - baseWidth, y + 14, x + 18, y + 15, 300, 0xFF373737);
+        guiGraphics.drawString(this.font, String.valueOf(discounted), x + 18, y + 9, 0xFFFFFFFF, true);
     }
 
     @Override

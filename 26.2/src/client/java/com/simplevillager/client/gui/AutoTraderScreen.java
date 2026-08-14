@@ -11,10 +11,12 @@ import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.ItemStack;
 
 public class AutoTraderScreen extends AbstractContainerScreen<AutoTraderContainer> {
 
     public static final Identifier BACKGROUND = Identifier.fromNamespaceAndPath(SimpleVillagerMod.MOD_ID, "textures/gui/container/auto_trader.png");
+    public static final Identifier DISCOUNT_STRIKETHROUGH = Identifier.withDefaultNamespace("container/villager/discount_strikethrough");
 
     public AutoTraderScreen(AutoTraderContainer container, Inventory playerInventory, Component name) {
         super(container, playerInventory, name, 176, 202);
@@ -36,6 +38,24 @@ public class AutoTraderScreen extends AbstractContainerScreen<AutoTraderContaine
                 g.centeredText(AutoTraderScreen.this.font, Component.translatable("gui.simplevillager.output"), AutoTraderScreen.this.leftPos + AutoTraderScreen.this.imageWidth / 2, AutoTraderScreen.this.topPos + 77, 0x404040);
             }
         });
+    }
+
+    @Override
+    public void extractContents(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTicks) {
+        super.extractContents(guiGraphics, mouseX, mouseY, partialTicks);
+        ItemStack base = menu.slots.get(0).getItem();
+        if (base.isEmpty()) return;
+        int baseCount = base.getCount();
+        int discounted = menu.getDiscountedCostACount();
+        if (discounted <= 0 || baseCount == discounted) return;
+        int x = this.leftPos + 36, y = this.topPos + 21;
+        String baseStr = String.valueOf(baseCount);
+        int baseWidth = this.font.width(baseStr);
+        if (baseCount == 1) {
+            guiGraphics.text(this.font, baseStr, x + 18 - baseWidth, y + 9, 0xFFFFFFFF, true);
+        }
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, DISCOUNT_STRIKETHROUGH, x + 18 - baseWidth, y + 13, baseWidth, 2);
+        guiGraphics.text(this.font, String.valueOf(discounted), x + 18, y + 9, 0xFFFFFFFF, true);
     }
 
     @Override

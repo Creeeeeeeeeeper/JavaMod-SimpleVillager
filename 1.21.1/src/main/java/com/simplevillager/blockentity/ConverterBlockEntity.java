@@ -204,9 +204,7 @@ public class ConverterBlockEntity extends VillagerBlockEntityBase implements Con
                 if (ownerPlayer != null) {
                     SimpleVillagerEntity v = entity.getVillagerEntity();
                     if (v != null) {
-                    if (ModConfig.server().universalReputation) {
-                        v.onReputationEventFrom(ReputationEventType.ZOMBIE_VILLAGER_CURED, ownerPlayer);
-                    }
+v.onReputationEventFrom(ReputationEventType.ZOMBIE_VILLAGER_CURED, ownerPlayer);
                 }
                     ItemStack villagerStack = entity.removeVillager();
                     if (!villagerStack.isEmpty()) {

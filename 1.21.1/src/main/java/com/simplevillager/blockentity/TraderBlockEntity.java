@@ -194,6 +194,9 @@ public class TraderBlockEntity extends VillagerBlockEntityBase implements Workst
             return true;
         }
         villagerEntity.setPos(getBlockPos().getX() + 0.5, getBlockPos().getY() + 1.0, getBlockPos().getZ() + 0.5);
+        for (MerchantOffer offer : villagerEntity.getOffers()) {
+            offer.resetSpecialPriceDiff();
+        }
         villagerEntity.setTradingPlayer(playerEntity);
         ((com.simplevillager.mixin.VillagerAccessor) villagerEntity).SimpleVillager$callUpdateSpecialPrices(playerEntity);
         villagerEntity.openTradingScreen(playerEntity, villagerEntity.getDisplayName(), villagerEntity.getVillagerData().getLevel());

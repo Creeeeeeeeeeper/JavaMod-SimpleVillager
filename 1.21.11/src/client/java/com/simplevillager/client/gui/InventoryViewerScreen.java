@@ -35,8 +35,8 @@ public class InventoryViewerScreen extends AbstractContainerScreen<InventoryView
         RenderPipeline pipeline = RenderPipelines.GUI_TEXTURED;
         guiGraphics.blit(pipeline, BACKGROUND, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight, 256, 256);
         renderArmorSlotIcons(guiGraphics);
-        guiGraphics.drawString(this.font, Component.translatable("gui.simplevillager.villager_inventory"), this.leftPos + 9, this.topPos + 9, 0x404040, false);
-        guiGraphics.drawString(this.font, Component.translatable("gui.simplevillager.villager_equipment"), this.leftPos + 58, this.topPos + 58, 0x404040, false);
+        guiGraphics.drawString(this.font, Component.translatable("gui.simplevillager.villager_inventory"), this.leftPos + 9, this.topPos + 9, 0xFF404040, false);
+        guiGraphics.drawString(this.font, Component.translatable("gui.simplevillager.villager_equipment"), this.leftPos + 58, this.topPos + 58, 0xFF404040, false);
     }
 
     private void renderArmorSlotIcons(GuiGraphics guiGraphics) {

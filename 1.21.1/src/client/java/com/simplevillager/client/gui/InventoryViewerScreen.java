@@ -31,8 +31,8 @@ public class InventoryViewerScreen extends AbstractContainerScreen<InventoryView
     protected void renderBg(GuiGraphics guiGraphics, float partialTicks, int mouseX, int mouseY) {
                 guiGraphics.blit(BACKGROUND, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight, 256, 256);
         Component invLabel = Component.translatable("gui.simplevillager.villager_inventory");
-        guiGraphics.drawString(this.font, invLabel, this.leftPos + this.imageWidth / 2 - this.font.width(invLabel) / 2, this.topPos + 9, 0x404040, false);
+        guiGraphics.drawString(this.font, invLabel, this.leftPos + this.imageWidth / 2 - this.font.width(invLabel) / 2, this.topPos + 9, 0xFF404040, false);
         Component equipLabel = Component.translatable("gui.simplevillager.villager_equipment");
-        guiGraphics.drawString(this.font, equipLabel, this.leftPos + this.imageWidth / 2 - this.font.width(equipLabel) / 2, this.topPos + 58, 0x404040, false);
+        guiGraphics.drawString(this.font, equipLabel, this.leftPos + this.imageWidth / 2 - this.font.width(equipLabel) / 2, this.topPos + 58, 0xFF404040, false);
     }
 }

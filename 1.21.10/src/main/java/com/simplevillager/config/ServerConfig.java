@@ -13,6 +13,6 @@ public class ServerConfig {
     public int incubatorSpeed = 1;
     public boolean villagerSounds = true;
     public boolean tradeCycling = true;
-    public boolean universalReputation = false;
+    
     public boolean autoTraderInfinite = false;
 }

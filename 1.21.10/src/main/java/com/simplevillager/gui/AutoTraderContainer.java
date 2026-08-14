@@ -18,6 +18,7 @@ public class AutoTraderContainer extends AbstractContainerMenu {
 
     private final AutoTraderBlockEntity trader;
     private boolean locked;
+    private int discountedCostACount;
     private final ContainerData tradeData;
 
     public AutoTraderContainer(int id, Inventory playerInventory, @Nullable AutoTraderBlockEntity trader) {
@@ -29,6 +30,9 @@ public class AutoTraderContainer extends AbstractContainerMenu {
                 if (index == 0) {
                     return trader != null && trader.isLocked() ? 0 : 1;
                 }
+                if (index == 1) {
+                    return trader != null ? trader.getDiscountedCostACount() : 0;
+                }
                 return 0;
             }
 
@@ -36,12 +40,14 @@ public class AutoTraderContainer extends AbstractContainerMenu {
             public void set(int index, int value) {
                 if (index == 0) {
                     locked = value == 0;
+                } else if (index == 1) {
+                    discountedCostACount = value;
                 }
             }
 
             @Override
             public int getCount() {
-                return 1;
+                return 2;
             }
         };
 
@@ -96,6 +102,10 @@ public class AutoTraderContainer extends AbstractContainerMenu {
 
     public boolean isLocked() {
         return locked;
+    }
+
+    public int getDiscountedCostACount() {
+        return discountedCostACount;
     }
 
     @Nullable

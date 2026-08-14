@@ -11,9 +11,12 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.util.Mth;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.Container;
 import net.minecraft.world.WorldlyContainer;
+import net.minecraft.world.entity.ai.gossip.GossipContainer;
+import net.minecraft.world.entity.ai.gossip.GossipType;
 import net.minecraft.world.entity.ai.village.poi.PoiTypes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.npc.Villager;
@@ -28,6 +31,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import com.simplevillager.blocks.VillagerBlockBase;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.UUID;
 
 public class AutoTraderBlockEntity extends VillagerBlockEntityBase implements WorkstationBlockEntity, Container, WorldlyContainer {
 
@@ -150,9 +155,24 @@ public class AutoTraderBlockEntity extends VillagerBlockEntityBase implements Wo
             if (infinite) {
                 o.resetUses();
             }
-            if (maxUses > 0) {
+if (maxUses > 0) {
                 ((com.simplevillager.mixin.MerchantOfferAccessor) o).SimpleVillager$setMaxUses(maxUses);
             }
+        }
+    }
+
+    private void applyReputationDiscount() {
+        SimpleVillagerEntity v = getVillagerEntity();
+        if (v == null) return;
+        GossipContainer gossips = v.getGossips();
+        if (gossips == null || gossips.getGossipEntries().isEmpty()) return;
+        int bestRep = 0;
+        for (UUID uuid : gossips.getGossipEntries().keySet()) {
+            bestRep = Math.max(bestRep, gossips.getReputation(uuid, type -> type != GossipType.TRADING));
+        }
+        if (bestRep <= 0) return;
+        for (MerchantOffer offer : v.getOffers()) {
+            offer.setSpecialPriceDiff(-Mth.floor(bestRep * offer.getPriceMultiplier()));
         }
     }
 
@@ -260,15 +280,20 @@ public class AutoTraderBlockEntity extends VillagerBlockEntityBase implements Wo
             tradeGuiInv.clearContent();
             return;
         }
-        tradeGuiInv.setItem(0, getAutoTradeInputA());
+tradeGuiInv.setItem(0, getBaseInputA());
         tradeGuiInv.setItem(1, offer.getCostB());
         tradeGuiInv.setItem(2, offer.getResult());
     }
 
-    public ItemStack getAutoTradeInputA() {
+    public ItemStack getBaseInputA() {
         MerchantOffer offer = getOffer();
         if (offer == null) return ItemStack.EMPTY;
-        return offer.getCostA().copy();
+        return offer.getBaseCostA().copy();
+    }
+
+    public int getDiscountedCostACount() {
+        MerchantOffer offer = getOffer();
+        return offer == null ? 0 : offer.getCostA().getCount();
     }
 
     public boolean isLocked() {
@@ -379,8 +404,9 @@ public class AutoTraderBlockEntity extends VillagerBlockEntityBase implements Wo
         SimpleVillagerEntity v = entity.getVillagerEntity();
         if (v == null) return;
 
-        if (!v.isTrading()) {
+if (!v.isTrading()) {
             entity.applyTradeLimits();
+            entity.applyReputationDiscount();
             // Auto-trade every 20 ticks
             if (level.getGameTime() % ModConfig.server().autoTraderSpeed == 0) {
                 entity.executeTrade();

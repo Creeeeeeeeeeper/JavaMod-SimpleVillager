@@ -53,7 +53,6 @@ public class ModConfig {
                 config.incubatorSpeed = getInt(map, "incubator_speed", config.incubatorSpeed);
                 config.villagerSounds = getBool(map, "villager_sounds", config.villagerSounds);
                 config.tradeCycling = getBool(map, "trade_cycling", config.tradeCycling);
-                config.universalReputation = getBool(map, "universal_reputation", config.universalReputation);
                 config.autoTraderInfinite = getBool(map, "auto_trader_infinite", config.autoTraderInfinite);
             } catch (Exception e) {
                 SimpleVillagerMod.LOGGER.error("Failed to load server config, using defaults", e);
@@ -158,11 +157,6 @@ public class ModConfig {
                 # 是否启用交易刷新按钮（服务端是否接受刷新请求）
                 trade_cycling = %b
 
-                # When enabled, curing a zombie villager grants the owner the "cured" reputation,
-                # giving discounts from this villager without a full village structure.
-                # 启用后，治愈僵尸村民会给予所有者“治愈”声望，使该村民提供折扣。
-                universal_reputation = %b
-
                 # Auto trader infinite mode - trades never run out, no restocking needed
                 # 自动交易站无限模式 - 交易不会耗尽，无需补货
                 auto_trader_infinite = %b
@@ -171,7 +165,7 @@ public class ModConfig {
                 formatStringArray(config.cropBlacklist),
                 config.golemSpawnTime, config.traderRestockTime, config.traderRestockUses,
                 config.traderMaxUses, config.autoTraderSpeed, config.incubatorSpeed,
-                config.villagerSounds, config.tradeCycling, config.universalReputation,
+                config.villagerSounds, config.tradeCycling,
                 config.autoTraderInfinite
         );
         writeToml(SERVER_CONFIG_PATH, toml);

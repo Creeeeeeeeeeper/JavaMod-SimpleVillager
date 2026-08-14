@@ -15,6 +15,7 @@ import com.simplevillager.client.renderer.IronFarmBER;
 import com.simplevillager.client.renderer.FarmerBER;
 import com.simplevillager.blockentity.ModBlockEntities;
 import com.simplevillager.blocks.ModBlocks;
+import com.simplevillager.config.ModConfig;
 import com.simplevillager.gui.ModMenus;
 import com.simplevillager.net.CycleTradesC2SPacket;
 import com.simplevillager.net.PickUpVillagerC2SPacket;
@@ -74,11 +75,10 @@ public class SimpleVillagerClient implements ClientModInitializer {
             }
         });
 
-        BedConfig.load();
         ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) ->
                 dispatcher.register(literal("sv").then(literal("reload").executes(ctx -> {
-                    BedConfig.load();
-                    ctx.getSource().sendFeedback(Component.literal("test.toml reloaded"));
+                    ModConfig.reload();
+                    ctx.getSource().sendFeedback(Component.literal("§aSimpleVillager config reloaded"));
                     return 1;
                 }))));
 
