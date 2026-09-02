@@ -228,7 +228,7 @@ public class ConverterBlockEntity extends VillagerBlockEntityBase implements Con
             }
 
             // Ambient sounds
-            if (entity.timer % 40 == 0 && level.getRandom().nextInt(3) == 0) {
+            if (entity.timer % 80 == 0 && level.getRandom().nextInt(3) == 0) {
                 if (entity.isZombiePhase()) {
                     VillagerBlockBase.playVillagerSound(level, pos, SoundEvents.ZOMBIE_VILLAGER_AMBIENT);
                 } else {

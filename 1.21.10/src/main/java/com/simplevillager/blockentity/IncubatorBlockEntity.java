@@ -133,7 +133,7 @@ public class IncubatorBlockEntity extends VillagerBlockEntityBase implements Con
                 }
 
                 // Random ambient sounds while incubating
-                if (level.getRandom().nextInt(40) == 0) {
+                if (level.getRandom().nextInt(80) == 0) {
                     VillagerBlockBase.playVillagerSound(level, pos, SoundEvents.VILLAGER_AMBIENT);
                 }
 

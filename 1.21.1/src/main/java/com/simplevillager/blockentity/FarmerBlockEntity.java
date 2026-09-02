@@ -151,7 +151,7 @@ public class FarmerBlockEntity extends VillagerBlockEntityBase implements Contai
         if (!(level instanceof ServerLevel serverLevel)) return;
 
         SimpleVillagerEntity v = entity.getVillagerEntity();
-        if (v != null) {
+        if (v != null && level.getRandom().nextInt(80) == 0) {
             VillagerBlockBase.playVillagerSound(level, pos, SoundEvents.VILLAGER_AMBIENT);
         }
 

@@ -80,7 +80,7 @@ public class InventoryViewerBlockEntity extends VillagerBlockEntityBase {
         if (level.isClientSide()) return;
         if (!entity.hasVillager()) return;
 
-        if (level.getRandom().nextInt(40) == 0) {
+        if (level.getRandom().nextInt(80) == 0) {
             com.simplevillager.blocks.VillagerBlockBase.playVillagerSound(level, pos, SoundEvents.VILLAGER_AMBIENT);
         }
     }

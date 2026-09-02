@@ -92,10 +92,10 @@ public class IronFarmBlockEntity extends VillagerBlockEntityBase implements Cont
 
         if (entity.hasVillager()) {
             // Random ambient sounds
-            if (level.getRandom().nextInt(40) == 0) {
+            if (level.getRandom().nextInt(80) == 0) {
                 VillagerBlockBase.playVillagerSound(level, pos, SoundEvents.VILLAGER_AMBIENT);
             }
-            if (level.getRandom().nextInt(40) == 0) {
+            if (level.getRandom().nextInt(80) == 0) {
                 VillagerBlockBase.playVillagerSound(level, pos, SoundEvents.ZOMBIE_AMBIENT);
             }
 
